@@ -7,28 +7,28 @@
         <script src="app.js"></script>
     </head>
     <body>
-      <div class="todolist">
-          <header class="header">
-              <input type="text" class="new-todo" placeholder="What needs to be done?">
-          </header>
-
-          <section class="main-area">
-
-              <!-- main body of the list -->
-              <input type="checkbox" class="toggle-all">
+        <div class="todoapp">
+            <header class="header">
+              <h1>todos</h1>
+              <!-- Add New Item -->
+              <input class="new-todo" type="text" placeholder="What needs to be done?" autofocus>
+            </header>
+          
+            <section class="main">
+              <input class="toggle-all" type="checkbox">
+              <!-- Show List -->
               <ul class="todo-list"></ul>
-
-              <!-- function in footer -->
+          
               <footer class="footer">
-                  <span class="todo-count"></span>
-                  <ul class="filters">
-                      <li><a class="selected" style="cursor: pointer;">All</a></li>
-                      <li><a class="selected" style="cursor: pointer;">Active</a></li>
-                      <li><a class="selected" style="cursor: pointer;">Completed</a></li>
-                  </ul>
-                  <button class="clear-completed">Clear completed</button>
+                <span class="todo-count"></span>
+                <ul class="filters">
+                  <li><a class="selected" style="cursor:pointer;">All</a></li>
+                  <li><a class="" style="cursor:pointer;">Active</a></li>
+                  <li><a class="" style="cursor:pointer;">Completed</a></li>
+                </ul>
+                <button class="clear-completed">Clear completed</button>
               </footer>
-          </section>
-      </div>  
+            </section>
+          </div> 
     </body>
 </html>
