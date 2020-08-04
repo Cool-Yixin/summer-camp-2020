@@ -148,7 +148,173 @@ var example1 = new Vue({
 
 7、v-on(指定事件监听器)
 
-监听 DOM 事件来触发一些 JavaScript 代码。
+监听 DOM 事件来触发一些 JavaScript 代码，使用户和应用进行交互。
 
 - 事件类型由参数指定，例如：click、submit等等。
 - 表达式可以是一个方法的名字或一个内联语句，这个内联跟样式的内联一样
+
+```html
+<div id="app-5">
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">反转消息</button>
+</div>
+```
+
+```javascript
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  methods: {//更新了应用状态，但没有触碰DOM,所有操作都用Vue来进行处理
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+```
+
+8、v-model指令，实现表单输入和应用状态之间的双向绑定
+
+9、组件化应用构建
+
+注册组件
+
+```js
+Vue.component('todo-item', {
+  template: '<li>这是个待办项</li>'//一个待办项
+    
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'//从父作用域将数据传至子组件
+})
+
+var app = new Vue(...)
+```
+
+v-bind指令将代办项传至循环输出的每个组件
+
+## Vue实例
+
+### 创建实例
+
+一个 Vue 应用由一个通过 `new Vue` 创建的**根 Vue 实例**，以及可选的嵌套的、可复用的组件树组成。
+
+```
+var vm = new Vue({
+  // 选项
+})
+```
+
+### 数据与方法
+
+- 当一个 Vue 实例被创建时，它将 `data` 对象中的所有的 property 加入到 Vue 的**响应式系统**中。
+
+- 添加新的property不会触发视图的更新
+
+  但如果一开始为空或不存在，仅需要设置一些初始值
+
+- 使用Object.freeze()组织修改现有的property
+
+### 实例生命周期的钩子
+
+- [`created`](https://cn.vuejs.org/v2/api/#created) 钩子可以用来在一个实例被创建之后执行代码
+
+-  [`mounted`](https://cn.vuejs.org/v2/api/#mounted)、[`updated`](https://cn.vuejs.org/v2/api/#updated) 和 [`destroyed`](https://cn.vuejs.org/v2/api/#destroyed)
+
+- this上下文指调用它的Vue实例
+
+  *不能在property或回调上使用箭头函数*
+
+  
+
+## 模板语法
+
+Vue.js 使用了基于 HTML 的模板语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。
+
+### 插值
+
+#### 文本
+
+数据绑定最常见的形式使用“Mustache”语法的文本插值：
+
+```
+<span>Message: {{ msg }}</span>
+```
+
+Mustache 标签将会被替代为对应数据对象上 `msg` property 的值。无论何时，绑定的数据对象上 `msg` property 发生了改变，插值处的内容都会更新。
+
+通过使用 v-once 指令执行一次性地插值，当数据改变时，插值处的内容不会更新。
+
+```
+<span v-once>这个将不会改变: {{ msg }}</span>
+```
+
+原始 HTML
+
+双大括号会将数据解释为普通文本，而非 HTML 代码。为了输出真正的 HTML，需要使用 `v-html` 指令：
+
+```
+<p>Using mustaches: {{ rawHtml }}</p>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>.
+```
+
+ `span` 的内容将会被替换成为 property 值 `rawHtml`，直接作为 HTML——会忽略解析 property 值中的数据绑定。
+
+#### Attribute
+
+Mustache 语法不能作用在 HTML attribute 上，遇到这种情况应该使用 `v-bind` 指令：
+
+```
+<div v-bind:id="dynamicId"></div>
+```
+
+#### 使用 JavaScript 表达式
+
+表达式会在所属 Vue 实例的数据作用域下作为 JavaScript 被解析。有个限制就是，每个绑定都只能包含**单个表达式**，所以下面的例子都**不会**生效。
+
+```
+<!-- 这是语句，不是表达式 -->
+{{ var a = 1 }}
+
+<!-- 流控制也不会生效，请使用三元表达式 -->
+{{ if (ok) { return message } }}
+```
+
+模板表达式都被放在sandbox中，只能访问全局变量的一个白名单如 `Math` 和 `Date` 。
+
+## 计算属性和侦听器
+
+### 计算属性
+
+对于任何复杂逻辑，都应当使用**计算属性**。
+
+```
+computed: {
+    // 计算属性的 getter
+    reversedMessage: function () {
+      // `this` 指向 vm 实例
+      return this.message.split('').reverse().join('')
+    }
+```
+
+#### 计算属性缓存 vs 方法
+
+```
+methods: {
+  reversedMessage: function () {
+    return this.message.split('').reverse().join('')
+  }
+}
+```
+
+**计算属性是基于它们的响应式依赖进行缓存的**。只在相关响应式依赖发生改变时它们才会重新求值。
+
+#### 计算属性 vs 侦听属性
+
+watch的命令写法重读，不如计算属性简洁
+
+### 侦听器
+
+当需要在数据变化时执行异步或开销较大的操作时，watch方式是最有用的。
+
+## Class与Style绑定
