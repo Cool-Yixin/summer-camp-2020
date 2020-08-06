@@ -311,3 +311,15 @@ ajax 笔记见[Ajax.md](./Notes/Ajax.md)
 [server包](./Tasks/Node/Task2)
 
 和[vue的入门笔记](./Notes/Vue.md)
+
+## 8.4
+
+学习Vue
+
+## 8.5/8.6
+
+继续学习vue
+
+听分享
+
+[使用vue制作计算器](./Tasks/Vue/vue-calculator)
