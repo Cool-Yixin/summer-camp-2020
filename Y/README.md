@@ -323,3 +323,9 @@ ajax 笔记见[Ajax.md](./Notes/Ajax.md)
 听分享
 
 [使用vue制作计算器](./Tasks/Vue/vue-calculator)
+
+## 8.7
+
+学习socket
+
+[使用vue制作chatroom，待完善](./Tasks/Vue/vue-chatroom)
