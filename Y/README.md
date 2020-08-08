@@ -329,3 +329,19 @@ ajax 笔记见[Ajax.md](./Notes/Ajax.md)
 学习socket
 
 [使用vue制作chatroom，待完善](./Tasks/Vue/vue-chatroom)
+
+## 8.8
+
+完成了chatroom
+
+虽然没做完最后的爱选修
+
+夏令营收官
+
+感谢各位学长学姐和我的导师兔宝宝的指路
+
+使我度过了一个充实的暑假
+
+秋天再见~~~！
+
+😘
